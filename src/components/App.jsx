@@ -14,7 +14,13 @@ export function App(props) {
     return <h1>Loading</h1>;
   }
 
-  return <TodoList items={props.todos} onItemClicked={props.toggleTodo} />;
+  return (
+    <TodoList
+      items={props.todos}
+      onItemClicked={props.toggleTodo}
+      renderTodo={props.renderTodo}
+    />
+  );
 }
 
 const mapStateToProps = state => {

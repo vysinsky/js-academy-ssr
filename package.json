@@ -6,11 +6,13 @@
     "build:client": "webpack --mode production",
     "build:client:watch": "webpack --mode production --watch",
     "prestart:server": "npm run build:client",
-    "start:server": "nodemon --exec babel-node ./server.js"
+    "start:server": "nodemon --exec babel-node ./server.js",
+    "start:next": "next"
   },
   "dependencies": {
     "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
+    "next": "^9.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "redux": "^4.0.5",

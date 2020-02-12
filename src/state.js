@@ -10,6 +10,13 @@ if (typeof window !== 'undefined') {
   delete window.__PRELOADED_STATE__;
 }
 
+export const toggleTodoState = function(todos, id) {
+  return todos.map(item => ({
+    ...item,
+    completed: item.id === id ? !item.completed : item.completed,
+  }));
+};
+
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'START_LOADING_TODOS':
@@ -32,8 +39,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         ...state,
         todos: state.todos.map(item => ({
           ...item,
-          completed:
-            item.id === action.payload.id ? !item.completed : item.completed,
+          todos: toggleTodoState(state.todos, action.payload.id),
         })),
       };
     default:
