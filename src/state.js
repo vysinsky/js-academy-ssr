@@ -1,7 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-const INITIAL_STATE = { todos: [], loading: false };
+const INITIAL_STATE =
+  typeof window !== 'undefined' && window.__PRELOADED_STATE__
+    ? window.__PRELOADED_STATE__
+    : { todos: [], loading: false };
+
+if (typeof window !== 'undefined') {
+  delete window.__PRELOADED_STATE__;
+}
 
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -54,7 +61,7 @@ export const actions = {
     type: 'TOGGLE_TODO',
     payload: { id },
   }),
-  loadTodos: () => {
+  loadTodos: (onLoadingFinished = () => {}) => {
     return async (dispatch, getState) => {
       if (getState().loading) {
         return;
@@ -64,6 +71,7 @@ export const actions = {
       const data = await res.json();
       dispatch(actions.storeTodos(data));
       dispatch(actions.stopLoadingTodos());
+      onLoadingFinished();
     };
   },
 };

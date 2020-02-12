@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { actions } from '../state';
 import TodoList from './TodoList';
 
-function App(props) {
+export function App(props) {
   useEffect(() => {
-    props.loadTodos();
+    if (!props.todos.length) {
+      props.loadTodos();
+    }
   }, []);
 
   if (props.loading) {
