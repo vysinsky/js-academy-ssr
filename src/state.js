@@ -54,7 +54,7 @@ export const actions = {
     type: 'TOGGLE_TODO',
     payload: { id },
   }),
-  loadTodos: () => {
+  loadTodos: (onFinished = () => {}) => {
     return async (dispatch, getState) => {
       if (getState().loading) {
         return;
@@ -64,6 +64,7 @@ export const actions = {
       const data = await res.json();
       dispatch(actions.storeTodos(data));
       dispatch(actions.stopLoadingTodos());
+      onFinished();
     };
   },
 };

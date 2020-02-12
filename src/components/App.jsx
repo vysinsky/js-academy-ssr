@@ -21,6 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   loadTodos: actions.loadTodos,
+  toggleTodo: actions.toggleTodo
 };
 
 export const ConnectedApp = connect(

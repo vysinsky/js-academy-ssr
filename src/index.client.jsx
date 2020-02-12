@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedApp } from './components/App.jsx';
 import { store } from './state';
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <ConnectedApp />
   </Provider>,
